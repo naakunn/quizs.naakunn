@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8" />
+  <title></title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta property="og:title" content="" />
+  <meta property="og:type" content="" />
+  <meta property="og:url" content="" />
+  <meta property="og:image" content="" />
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+  <!-- Place favicon.ico in the root directory -->
+
+  <!-- <link rel="stylesheet" href="css/normalize.css" /> -->
+  <!-- <link rel="stylesheet" href="css/main.css" /> -->
+
+  <meta name="theme-color" content="#fafafa" />
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="container">
+      <div id="js-question" class="mt-5  alert alert-primary" role="alert">
+        A simple primary alert—check it out!
+      </div>
+      <div class="d-flex justify-content-center">
+        <button type="button" class="btn btn-primary">Primary</button>
+        <button type="button" class="ml-1 btn btn-primary">Primary</button>
+        <button type="button" class="ml-1 btn btn-primary">Primary</button>
+        <button type="button" class="ml-1 btn btn-primary">Primary</button>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+const quiz = [{
+    question: "胡蝶しのぶの独特な形の愛刀、作ったのは誰？",
+    answers: [
+      "鋼鐵塚　蛍",
+      "鉄穴森　鋼蔵",
+      "鉄地河原　鉄珍",
+      "鉄井戸",
+    ],
+    correct: "鉄地河原　鉄珍"
+  },
+  {
+    question: "胡蝶しのぶの好きな食べ物はなん",
+    answers: [
+      "さつまいもの味噌汁",
+      "桜餅",
+      "とろろ昆布",
+      "生姜の佃煮",
+    ],
+    correct: "生姜の佃煮"
+  },
+  {
+    question: "胡蝶しのぶの技で誤っているのはどれ？",
+    answers: [
+      "蜂牙ノ舞　真靡き",
+      "蜻蛉舞い 複眼六角",
+      "蜈蚣ノ舞 百足邪腹",
+      "蝶の舞　戯れ",
+    ],
+    correct: "蜈蚣ノ舞 百足邪腹"
+  },
+  {
+    question: "胡蝶しのぶが童磨にやられる寸前に放った言葉は？",
+    answers: [
+      "地獄に堕ちろ",
+      "とっととくたばれ糞野郎",
+      "胸を張って生きろ",
+      "ちょっと君おイタが過ぎるわよ",
+    ],
+    correct: "地獄に堕ちろ"
+  },
+  {
+    question: "胡蝶しのぶの身長と体重で正しいのはどれ？",
+    answers: [
+      "162cm/40kg",
+      "148cm/40kg",
+      "151cm/37kg",
+      "154cm/37kg",
+    ],
+    correct: "151cm/37kg"
+  },
+  {
+    question: "柱内で胡蝶しのぶは何番目に若いか？また何歳か？",
+    answers: [
+      "2番目に若い、19歳",
+      "8番目に若い、26歳",
+      "6番目に若い、21歳",
+      "1番目に若い、18歳",
+    ],
+    correct: "1番目に若い、18歳"
+  },
+  {
+    question: "胡蝶しのぶの体に蓄積していた毒は致死量の何倍でしょう？",
+    answers: [
+      "70倍",
+      "10倍",
+      "87倍",
+      "6倍",
+    ],
+    correct: "70倍"
+  },
+  {
+    question: "胡蝶しのぶの使う蟲の呼吸は、花の呼吸からの派生ですが、花の呼吸は何の呼吸の派生？",
+    answers: [
+      "霞の呼吸",
+      "水の呼吸",
+      "風の呼吸",
+      "岩の呼吸",
+    ],
+    correct: "水の呼吸"
+  },
+  {
+    question: "胡蝶しのぶの住んでいる蝶屋敷に、住んでいる人で誤っているものはどれ？",
+    answers: [
+      "神崎アオイ",
+      "高田なほ",
+      "寺田きよ",
+      "中原すみ",
+    ],
+    correct: "寺田きよ"
+  },
+  {
+    question: "鬼滅の刃作者の吾峠呼世晴氏が胡蝶しのぶを描く上で気をつけていることで、誤っているものは？",
+    answers: [
+      "まつげ厚め",
+      "もみあげは毛は細く始まる",
+      "ウエストは細めで高い",
+      "二重幅ほそめ",
+    ],
+    correct: "二重幅ほそめ"
+  }
+];
+
+const quizLength = quiz.length;
+let quizIndex = 0;
+let score = 0;
+
+const $button = document.getElementsByTagName('button');
+const buttonLength = $button.length;
+
+//クイズの問題文、選択肢を定義
+const setupQuiz = () => {
+  document.getElementById('js-question').textContent = quiz[quizIndex].question;
+  let buttonIndex = 0;
+
+  while (buttonIndex < buttonLength) {
+    $button[buttonIndex].textContent = quiz[quizIndex].answers[buttonIndex];
+    buttonIndex++;
+  }
+};
+setupQuiz();
+
+const clickHandlar = (e) => {
+  if (quiz[quizIndex].correct === e.target.textContent) {
+    alert("正解！");
+    score++;
+  } else {
+    alert("不正解！");
+  }
+
+  quizIndex++;
+
+  if (quizIndex < quizLength) {
+    //問題数がまだあればこれを実行
+    setupQuiz();
+  } else {
+    //問題数がもうなければこれを実行
+    alert("終了！あなたの正解数は" + score + "/" + quizLength + "です！");
+  }
+};
+
+let handlarIndex = 0;
+while (handlarIndex < buttonLength) {
+  $button[handlarIndex].addEventListener('click', (e) => {
+    clickHandlar(e);
+  });
+  handlarIndex++;
+}
+  </script>
+</body>
+
+</html>
